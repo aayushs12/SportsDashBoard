@@ -149,14 +149,22 @@ Column {.tabset .tabset-fade data-width=600}
 #radar chart
 df2<-read.csv("C:\\Users\\aayus\\Downloads\\football.csv")
 library(fmsb)
-pl<-subset(df2,Player.Name=="Wayne Rooney")
+pl<-subset(df2,Player.Name=="Harry Kane")
+pl3<-subset(df2,Player.Name=="Bruno Fernandes")
+pl2<-subset(df2,Player.Name=="Mohamed Salah")
 pls<-data.frame(pl['Goals.Per.Match'],pl['Passes.Per.Match'],pl['Shooting.Accuracy..'],pl['Appearances'],pl['Shots.On.Target'])
+pls2<-data.frame(pl2['Goals.Per.Match'],pl2['Passes.Per.Match'],pl2['Shooting.Accuracy..'],pl2['Appearances'],pl2['Shots.On.Target'])
+pls3<-data.frame(pl3['Goals.Per.Match'],pl3['Passes.Per.Match'],pl3['Shooting.Accuracy..'],pl3['Appearances'],pl3['Shots.On.Target'])
 max_min <- data.frame(Goals.Per.Match = c(1,0),Passes.Per.Match=c(100,0),Shooting.Accuracy..=c(50,0),Appearances=c(1000,0),Shots.On.Target=c(500,0))
 rownames(max_min) <- c("Max", "Min")
 # Bind the variable ranges to the data
-dfn<-rbind(max_min,pls)
-pldata<-dfn[c("Max", "Min", "498"), ]
-radarchart(pldata,title="Wayne Rooney - Player Stats")
+dfn<-rbind(max_min,pls,pls2,pls3)
+pldata<-dfn[c("Max", "Min", "498","7","155"), ]
+colors_border=c(rgb(0.7,0.5,0.1,0.4), rgb(0.2,0.5,0.5,0.4), rgb(0.8,0.2,0.5,0.4) )
+colors_in=c(rgb(0.7,0.5,0.1,0.4), rgb(0.2,0.5,0.5,0.4), rgb(0.8,0.2,0.5,0.4) )
+radarchart(pldata,title="Player Stats for Top 3 Goal Scorers",cglcol="grey", cglty=1, axislabcol="grey",pcol=colors_border,pfcol = colors_in);
+legend("topleft",legend = c("Harry Kane","Mohamed Salah","Bruno Fernandes"), bty = "n", pch=20 , col=colors_in , text.col = "black", cex=0.8, pt.cex=3)
+
 ```
 
 ### Number of touches by player
